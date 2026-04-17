@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMovieById, getMovieCredits } from "../services/movies.service";
+import { getMovieById, getMovieCredits, getWatchProviders } from "../services/movies.service";
 import type { Movie } from "../types/movie";
 import type { CastMember } from "../types/cast";
 
@@ -8,14 +8,17 @@ export function useMovieDetail(id: string) {
   const [cast, setCast] = useState<CastMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [providers, setProviders] = useState<any>(null);
 
   useEffect(() => {
     async function loadMovieDetail() {
       try {
-        const [movieData, creditsData] = await Promise.all([
+        const [movieData, creditsData, providersData] = await Promise.all([
           getMovieById(id),
           getMovieCredits(id),
+          getWatchProviders(id),
         ]);
+        setProviders(providersData);
 
         setMovie(movieData);
         setCast(creditsData.cast.slice(0, 10));
@@ -35,5 +38,6 @@ export function useMovieDetail(id: string) {
     cast,
     loading,
     error,
+    providers
   };
 }

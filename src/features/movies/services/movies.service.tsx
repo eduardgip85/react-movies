@@ -85,3 +85,14 @@ export async function discoverMovies( filters: MovieFilters): Promise<Movie[]>{
 
     return data.results;
 }
+
+export async function getWatchProviders(movieId: string, country = "US") {
+    const res = await tmdbRequest<any>({
+        endpoint: `/movie/${movieId}/watch/providers`,
+    });
+
+    console.log("WATCH PROVIDERS RAW:", res);
+    console.log("COUNTRY DATA:", res.results?.[country]);
+
+    return res.results?.[country] ?? null;
+}
