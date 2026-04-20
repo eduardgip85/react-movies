@@ -27,7 +27,7 @@ export default function AppRouter() {
             path="/favorites"
             element={
                 <ProtectedRoute>
-                <FavoritesPage />
+                    <FavoritesPage />
                 </ProtectedRoute>
             }
             />
@@ -36,7 +36,7 @@ export default function AppRouter() {
             path="/profile"
             element={
                 <ProtectedRoute>
-                <ProfilePage />
+                    <ProfilePage />
                 </ProtectedRoute>
             }
             />
