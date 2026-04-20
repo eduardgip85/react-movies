@@ -9,7 +9,7 @@ type ProtectedRouteProps = {
 export default function ProtectedRoute({
   children,
 }: ProtectedRouteProps) {
-  //luego conectar con el estado de autenticación real (context, redux, supabase, etc.)
+  
   const {user, loading} = useAuth();
 
   if (loading) {
